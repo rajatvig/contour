@@ -891,7 +891,8 @@ If not set, SameSite attribute will not be rewritten.</p>
 <a href="#projectcontour.io/v1.HTTPProxyStatus">HTTPProxyStatus</a>, 
 <a href="#projectcontour.io/v1.TLSCertificateDelegationStatus">TLSCertificateDelegationStatus</a>, 
 <a href="#projectcontour.io/v1alpha1.ContourConfigurationStatus">ContourConfigurationStatus</a>, 
-<a href="#projectcontour.io/v1alpha1.ExtensionServiceStatus">ExtensionServiceStatus</a>)
+<a href="#projectcontour.io/v1alpha1.ExtensionServiceStatus">ExtensionServiceStatus</a>, 
+<a href="#projectcontour.io/v1alpha1.TracingServiceStatus">TracingServiceStatus</a>)
 </p>
 <p>
 <p>DetailedCondition is an extension of the normal Kubernetes conditions, with two extra
@@ -4280,6 +4281,8 @@ Resource Types:
 <a href="#projectcontour.io/v1alpha1.ContourDeployment">ContourDeployment</a>
 </li><li>
 <a href="#projectcontour.io/v1alpha1.ExtensionService">ExtensionService</a>
+</li><li>
+<a href="#projectcontour.io/v1alpha1.TracingService">TracingService</a>
 </li></ul>
 <h3 id="projectcontour.io/v1alpha1.ContourConfiguration">ContourConfiguration
 </h3>
@@ -4852,11 +4855,122 @@ ExtensionServiceStatus
 </tr>
 </tbody>
 </table>
+<<<<<<< HEAD
 <h3 id="projectcontour.io/v1alpha1.AccessLogFormatString">AccessLogFormatString
 (<code>string</code> alias)</p></h3>
 <p>
 </p>
 <h3 id="projectcontour.io/v1alpha1.AccessLogJSONFields">AccessLogJSONFields
+||||||| parent of 31335cd9 (WIP)
+<h3 id="projectcontour.io/v1alpha1.AccessLogFields">AccessLogFields
+=======
+<h3 id="projectcontour.io/v1alpha1.TracingService">TracingService
+</h3>
+<p>
+<p>TracingService is the schema for the Contour Tracing Service API.
+A TracingService resource binds an OpenCensus Cluster to Envoy
+in the bootstrap phase so that HTTPProxy Resources can specify tracing</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>apiVersion</code></br>
+string</td>
+<td>
+<code>
+projectcontour.io/v1alpha1
+</code>
+</td>
+</tr>
+<tr>
+<td>
+<code>kind</code></br>
+string
+</td>
+<td><code>TracingService</code></td>
+</tr>
+<tr>
+<td style="white-space:nowrap">
+<code>metadata</code>
+<br>
+<em>
+<a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#objectmeta-v1-meta">
+Kubernetes meta/v1.ObjectMeta
+</a>
+</em>
+</td>
+<td>
+Refer to the Kubernetes API documentation for the fields of the
+<code>metadata</code> field.
+</td>
+</tr>
+<tr>
+<td style="white-space:nowrap">
+<code>spec</code>
+<br>
+<em>
+<a href="#projectcontour.io/v1alpha1.TracingServiceSpec">
+TracingServiceSpec
+</a>
+</em>
+</td>
+<td>
+<br>
+<br>
+<table style="border:none">
+<tr>
+<td style="white-space:nowrap">
+<code>format</code>
+<br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>Format is the type of Tracing configured in Envoy.
+Currently, only opencensus is supported.</p>
+</td>
+</tr>
+<tr>
+<td style="white-space:nowrap">
+<code>address</code>
+<br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>AgentAddress is the address for the Collector
+to report traces to. The specific type is</p>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td style="white-space:nowrap">
+<code>status</code>
+<br>
+<em>
+<a href="#projectcontour.io/v1alpha1.TracingServiceStatus">
+TracingServiceStatus
+</a>
+</em>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="projectcontour.io/v1alpha1.AccessLogFields">AccessLogFields
+>>>>>>> 31335cd9 (WIP)
 (<code>[]string</code> alias)</p></h3>
 <p>
 (<em>Appears on:</em>
@@ -7630,6 +7744,89 @@ string
 If not set, a default value of 2 seconds will be used.</p>
 <p>See <a href="https://www.envoyproxy.io/docs/envoy/latest/api-v3/config/cluster/v3/cluster.proto#envoy-v3-api-field-config-cluster-v3-cluster-connect-timeout">https://www.envoyproxy.io/docs/envoy/latest/api-v3/config/cluster/v3/cluster.proto#envoy-v3-api-field-config-cluster-v3-cluster-connect-timeout</a>
 for more information.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="projectcontour.io/v1alpha1.TracingServiceSpec">TracingServiceSpec
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#projectcontour.io/v1alpha1.TracingService">TracingService</a>)
+</p>
+<p>
+<p>TracingServiceSpec defines the desired state of a TracingService resource.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="white-space:nowrap">
+<code>format</code>
+<br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>Format is the type of Tracing configured in Envoy.
+Currently, only opencensus is supported.</p>
+</td>
+</tr>
+<tr>
+<td style="white-space:nowrap">
+<code>address</code>
+<br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>AgentAddress is the address for the Collector
+to report traces to. The specific type is</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="projectcontour.io/v1alpha1.TracingServiceStatus">TracingServiceStatus
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#projectcontour.io/v1alpha1.TracingService">TracingService</a>)
+</p>
+<p>
+<p>TracingServiceStatus defines the observed state of an
+TracingService resource.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="white-space:nowrap">
+<code>conditions</code>
+<br>
+<em>
+<a href="#projectcontour.io/v1.DetailedCondition">
+[]DetailedCondition
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>Conditions contains the current status of the TracingService resource.</p>
+<p>Contour will update a single condition, <code>Valid</code>, that is in normal-true polarity.</p>
+<p>Contour will not modify any other Conditions set in this block,
+in case some other controller wants to add a Condition.</p>
 </td>
 </tr>
 </tbody>
